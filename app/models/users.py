@@ -6,6 +6,7 @@ class Users(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(500), nullable=False)
     password = db.Column(db.String(50), nullable=False)
+    username = db.Column(db.String(500), nullable=True)
     user_group_id = db.Column(db.Integer, db.ForeignKey('user_groups.user_group_id'))
 
     def __repr__(self):

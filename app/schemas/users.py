@@ -1,17 +1,14 @@
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
-from marshmallow_sqlalchemy.fields import fields
-from app.models.users import Users
-from app.schemas.user_groups import UserGroupsSchema
+from pydantic import BaseModel
+from typing import Optional
 
 
-class UsersSchema(SQLAlchemyAutoSchema):
+class UsersSchema(BaseModel):
+    """Users schema"""
+    name: Optional[str]
+    password: Optional[str]
+    username: Optional[str]
+    user_group_id: Optional[int]
 
-    class Meta:
-        model = Users
-        exclude = ['email']
-        load_instance = True
-        include_fk = True
-        include_relationships = True
+    class Config:
+        orm_mode = True
 
-    user_id = auto_field()
-    user_group_id = fields.Nested(UserGroupsSchema, many=True)

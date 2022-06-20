@@ -1,6 +1,5 @@
 from app import db
 
-
 movie_director = db.Table('movie_director',
                           db.Column('movie_id', db.Integer, db.ForeignKey('movies.movie_id')),
                           db.Column('director_id', db.Integer, db.ForeignKey('directors.director_id')))
@@ -24,4 +23,4 @@ class Movies(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     def __repr__(self):
-        return f"<Movies:{self.movie_id}', {self.name}>"
+        return f"<Movies:{self.movie_id}', {self.name}, {self.directors}>"

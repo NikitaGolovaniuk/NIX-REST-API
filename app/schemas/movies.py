@@ -1,18 +1,35 @@
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
-from marshmallow_sqlalchemy.fields import fields
-from app.models.movies import Movies
-from app.schemas.users import UsersSchema
+from typing import Any, Optional, List
+import datetime
+from pydantic import BaseModel, validator
+from app.schemas.directors import DirectorsSchema
+from app.schemas.genres import GenresSchema
 
 
-class MoviesSchema(SQLAlchemyAutoSchema):
+class MoviesSchema(BaseModel):
+    name: Optional[str]
+    release_date: datetime.date
+    description: Optional[str]
+    rating: Optional[int]
+    poster_url: Optional[str]
+    directors: Optional[List[DirectorsSchema]]
+    id_genre: Optional[List[GenresSchema]]
+    user_id: Optional[int]
 
-    class Meta:
-        model = Movies
-        exclude = ['email']
-        load_instance = True
-        include_fk = True
-        include_relationships = True
+    class Config:
+        orm_mode = True
 
-    movie_id = auto_field()
-    user_id = fields.Nested(UsersSchema, many=True)
+
+class MoviesSchemaAdd(BaseModel):
+    name: Optional[str]
+    release_date: Optional[datetime.date]
+    description: Optional[str]
+    rating: Optional[int]
+    poster_url: Optional[str]
+
+    class Config:
+        orm_mode = True
+
+
+
+
 

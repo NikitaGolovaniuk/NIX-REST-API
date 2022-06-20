@@ -1,14 +1,9 @@
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
-from app.models.genres import Genres
+from pydantic import BaseModel
+from typing import Optional
 
 
-class GenresSchema(SQLAlchemyAutoSchema):
+class GenresSchema(BaseModel):
+    name: Optional[str]
 
-    class Meta:
-        model = Genres
-        exclude = ['email']
-        load_instance = True
-        include_fk = True
-        include_relationships = True
-
-    genre_id = auto_field()
+    class Config:
+        orm_mode = True

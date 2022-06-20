@@ -1,14 +1,10 @@
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
-from app.models.directors import Directors
+from pydantic import BaseModel
+from typing import Optional
 
 
-class DirectorsSchema(SQLAlchemyAutoSchema):
+class DirectorsSchema(BaseModel):
+    """Directors schema"""
+    name: Optional[str]
 
-    class Meta:
-        model = Directors
-        exclude = ['email']
-        load_instance = True
-        include_fk = True
-        include_relationships = True
-
-    director_id = auto_field()
+    class Config:
+        orm_mode = True
