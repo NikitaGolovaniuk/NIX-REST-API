@@ -4,11 +4,11 @@ from abc import ABC, abstractmethod
 class AbstractRepository(ABC):
 
     @abstractmethod
-    def post(self, *args, **kwargs):
+    def create(self, *args, **kwargs):
         pass
 
     @abstractmethod
-    def get(self, *args, **kwargs):
+    def read(self, *args, **kwargs):
         pass
 
     @abstractmethod
@@ -20,7 +20,7 @@ class AbstractRepository(ABC):
         pass
 
     @abstractmethod
-    def get_many(self):
+    def read_many(self):
         pass
 
 

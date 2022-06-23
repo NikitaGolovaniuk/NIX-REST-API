@@ -9,6 +9,7 @@ model = user_api.model('Model', {
     'name': fields.String,
     'username': fields.String,
     'password': fields.String,
+    'user_group_id': fields.Integer,
 })
 
 

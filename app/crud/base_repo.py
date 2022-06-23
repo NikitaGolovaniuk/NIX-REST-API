@@ -2,10 +2,10 @@ from app.crud.abstract_repo import AbstractRepository
 
 
 class BaseRepository(AbstractRepository):
-    def post(self, *args, **kwargs):
+    def create(self, *args, **kwargs):
         pass
 
-    def get(self, *args, **kwargs):
+    def read(self, *args, **kwargs):
         pass
 
     def update(self):
@@ -14,7 +14,7 @@ class BaseRepository(AbstractRepository):
     def delete(self):
         pass
 
-    def get_many(self):
+    def read_many(self):
         pass
 
 

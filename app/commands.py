@@ -1,22 +1,23 @@
 import random
-from . import app
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
 from faker import Faker
+from . import app
 from app.models.directors import Directors
 from app.models.user_groups import UserGroups
 from app.models.users import Users
 from app.models.genres import Genres
 from app.models.movies import Movies, movie_genre, movie_director
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
 
 
-engine = create_engine("postgresql://admin:admin@0.0.0.0:5432/my_db")
+engine = create_engine("postgresql://admin:admin@db:5432/my_db")
 session = sessionmaker(bind=engine)
 s = session()
 faker = Faker()
 groups = ('user', 'admin')
 genres = ("Action", "Comedy", "Drama", "Fantasy", "Horror", "Mystery", "Romance", "Thriller", "Western")
 rows_seed = 50
+
 
 @app.cli.command('seed')
 def seed():
@@ -31,7 +32,7 @@ def seed():
         s.commit()
 
     for _ in range(rows_seed):
-        user = Users(name=faker.name(), password=faker.password(), user_group_id=random.randint(1, 2))
+        user = Users(name=faker.name(), username=faker.user_name(), password=faker.password(), user_group_id=random.randint(1, 2))
         s.add(user)
         s.commit()
 
